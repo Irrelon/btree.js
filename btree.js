@@ -30,9 +30,11 @@ var btree = (function() {
      */
     function concat(var_args) {
         // Array#concat behaves strangely for empty arrays, so...
+
+        // EDIT: Concat does not behave strangely for empty arrays... whatever that means!
         var a = [];
         for (var i=0; i<arguments.length; i++) {
-            Array.prototype.push.apply(a, arguments[i]);
+            a = a.concat(arguments[i]);
         }
         return a;
     }
