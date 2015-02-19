@@ -19,7 +19,7 @@
  * Released under the Apache License, Version 2.0
  * see: http://github.com/dcodeIO/btree.js for details
  */
-(function(module, console) {
+var btree = (function() {
     'use strict';
 
     /**
@@ -48,10 +48,14 @@
         // This is faster than Array#indexOf because it's raw. However, we
         // cannot use binary search because nodes do not have a comparable
         // key. If the compiler is smart, it will inline this.
-        for (var i=0; i<a.length; i++) {
+
+        // EDIT: This is NOT faster than indexOf - all perf tests show this:
+        // http://jsperf.com/js-for-loop-vs-array-indexof/253
+        /*for (var i=0; i<a.length; i++) {
             if (a[i] === v) return i;
-        }
-        return -i;
+        }*/
+
+        return a.indexOf(v);
     }
     
     /**
@@ -711,6 +715,5 @@
         return Tree;
     };
     
-    module.exports = btree;
-    
-})(module, console);
+    return btree;
+})();
